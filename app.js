@@ -6,6 +6,8 @@ import bodyParser from "body-parser";
 import { errorMiddleware } from "./middleware/globalError.js";
 import connectDb from "./lib/dbConnect.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import morgan from "morgan";
 
 //Routes
 import userRoute from "./routes/userRoute.js";
@@ -18,6 +20,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(morgan("dev"));
 
 connectDb();
 
