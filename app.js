@@ -25,6 +25,10 @@ app.use(morgan("dev"));
 
 connectDb();
 
+app.get("/", (req, res) => {
+  res.status(200).json({ Success: "Working" });
+});
+
 app.use("/api/user", userRoute);
 app.use("/api/transaction", transactionRoute);
 
