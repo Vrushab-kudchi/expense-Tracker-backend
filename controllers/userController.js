@@ -8,6 +8,8 @@ import {
 } from "../utils/zodSchema.js";
 import bcrypt from "bcrypt";
 
+const secure = process.env.SECURE;
+
 export const register = TryCatch(async (req, res, next) => {
   const data = registerSchema.safeParse(req.body);
   if (!data.success) {
@@ -25,6 +27,7 @@ export const register = TryCatch(async (req, res, next) => {
   res.cookie("token", token, {
     maxAge: 1000 * 1 * 60 * 60 * 6,
     httpOnly: true,
+    secure: true, // if not development turn it off or false
     sameSite: "None",
   });
   res.status(201).json({ success: true, message: "User Created" });
@@ -52,6 +55,7 @@ export const login = TryCatch(async (req, res, next) => {
   res.cookie("token", token, {
     maxAge: 1000 * 1 * 60 * 60 * 6,
     httpOnly: true,
+    secure: true, // if not development turn it off or false
     sameSite: "None",
   });
   res.status(200).json({ success: true, message: "Success" });
