@@ -30,7 +30,7 @@ export const register = TryCatch(async (req, res, next) => {
     secure: true, // if not development turn it off or false
     sameSite: "None",
   });
-  res.status(201).json({ success: true, message: "User Created" });
+  res.status(201).json({ success: true, message: "User Created", data: token });
 });
 
 export const login = TryCatch(async (req, res, next) => {
@@ -58,7 +58,7 @@ export const login = TryCatch(async (req, res, next) => {
     secure: true, // if not development turn it off or false
     sameSite: "None",
   });
-  res.status(200).json({ success: true, message: "Success" });
+  res.status(200).json({ success: true, message: "Success", data: token });
 });
 
 export const getProfile = TryCatch(async (req, res, next) => {
